@@ -51,11 +51,23 @@ public class ProgramaPrincipal {
                     System.out.print("Informe a altura: ");
                     altura = tec.nextDouble();
 
-                    pessoaController.cadastrarPessoa(nome, cpf, email, idade, altura);
+                    PessoaEntity pessoaEntity = pessoaController.cadastrarPessoa(nome, cpf, email, idade, altura);
+                    pessoas.add(pessoaEntity);
                     break;
 
                 case 2:
                     System.out.println("---Editar Pessoa---");
+                    System.out.print("Informe o ID da pessoa: ");
+                    int id = tec.nextInt();
+                    if (id >= pessoas.size() || id < 0) {
+                        System.out.println("ID não encontrado");
+                        break;
+                    }
+
+                    PessoaEntity pessoaEntityEdit = pessoas.get(id);
+                    PessoaEntity pessoaEditada = pessoaController.editarPessoa(pessoaEntityEdit);
+                    pessoas.set(id, pessoaEditada);
+
                     break;
 
                 case 3:
